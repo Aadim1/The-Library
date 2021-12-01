@@ -1,6 +1,8 @@
 const main = document.querySelector('.root');
 const addButton = document.querySelector('.add-button');
 const form_ = document.querySelector('.form');
+
+
 class Book {
     constructor(title, author, pages, read) {
             this.author = author;
@@ -49,7 +51,6 @@ const completeOrNot = (read) => {
 const edit = (list, deleteDIV, harry) => {
 
     while (list.firstChild) {
-        console.log('hello world')
         list.removeChild(list.firstChild);
     };
     //title
@@ -59,6 +60,7 @@ const edit = (list, deleteDIV, harry) => {
     editTitle.classList.toggle('title');
     editTitle.classList.toggle('input');
     editTitle.setAttribute('data-label', 'Title');
+    editTitle.setAttribute('type', 'text');
     editTitle.value = harry.getTitle();
     list.appendChild(editTitle);
 
@@ -69,9 +71,10 @@ const edit = (list, deleteDIV, harry) => {
     editAuthor.classList.toggle('author')
     editAuthor.classList.toggle('input');
     editAuthor.setAttribute('data-label', 'Author');
+    editAuthor.setAttribute('type', 'text');
     editAuthor.value = harry.getAuthor();
     list.appendChild(editAuthor);
-    editAuthor.style['margin-left'] = '1rem';
+    editAuthor.style['margin-left'] = '3rem';
 
     //pages
     let editPages = document.createElement('input');
@@ -79,7 +82,8 @@ const edit = (list, deleteDIV, harry) => {
     editPages.classList.toggle('col-3');
     editPages.classList.toggle('input');
     editPages.setAttribute('data-label', 'Pages');
-    editPages.value = harry.getPages()
+    editPages.value = harry.getPages();
+    editPages.setAttribute('type', 'number');
     list.appendChild(editPages);
     editPages.style['margin-left'] = '1rem';
     editPages.style.width = '80px';
@@ -89,7 +93,7 @@ const edit = (list, deleteDIV, harry) => {
     let editRead = document.createElement('input');
     editRead.classList.toggle('read');
     editRead.classList.toggle('custom-btn');
-    editRead.classList.toggle('btn-1');
+    editRead.classList.toggle('btn-5');
     editRead.classList.toggle('col');
     editRead.classList.toggle('col-4');
     editRead.setAttribute('type', 'button');
@@ -100,21 +104,29 @@ const edit = (list, deleteDIV, harry) => {
     editRead.style['margin-left'] = '1rem';
 
     //edit
-    let doneDIV = document.createElement('div');
-    let doneDOM = document.createElement('img');
-    doneDIV.appendChild(doneDOM)
-    doneDOM.setAttribute('src', './edit.png');
+    let doneDOM = document.createElement('input');
+    doneDOM.setAttribute('type', 'button');
+    doneDOM.classList.toggle('custom-btn');
+    doneDOM.classList.toggle('btn-5');
     doneDOM.classList.toggle('col');
     doneDOM.classList.toggle('col-5');
-    list.appendChild(doneDIV);
-    doneDIV.style['margin-left'] = '2rem';
+    doneDOM.setAttribute('value', 'Done');
+    list.appendChild(doneDOM);
 
 
     //delete
     delet = deleteDIV;
     delet.style['margin-left'] = '4rem';
+    delet.style.cursor = 'pointer';
 
     list.appendChild(delet);
+
+    const editedDOM = () => {
+        list.remove();
+        addBookToDom(editTitle, editAuthor, editPages, editRead);
+    }
+
+    doneDOM.addEventListener('click', editedDOM);
 
 };
 
@@ -125,7 +137,6 @@ const addBookToDom = (title, author, pages, read, inputContainer) => {
     list.classList.toggle('table-row');
 
     let harry = new Book(title.value, author.value, pages.value, read.value);
-    console.log(harry)
 
     //title
     let titleDOM = document.createElement('div');
@@ -158,7 +169,7 @@ const addBookToDom = (title, author, pages, read, inputContainer) => {
     let readDOM = document.createElement('input');
     readDOM.classList.toggle('read');
     readDOM.classList.toggle('custom-btn');
-    readDOM.classList.toggle('btn-1');
+    readDOM.classList.toggle('btn-6');
     readDOM.classList.toggle('col');
     readDOM.classList.toggle('col-4');
     readDOM.setAttribute('type', 'button');
@@ -169,14 +180,14 @@ const addBookToDom = (title, author, pages, read, inputContainer) => {
     list.appendChild(readDOM);
 
     //edit
-    let editDIV = document.createElement('div');
-    let editDOM = document.createElement('img');
-    editDIV.appendChild(editDOM)
-    editDOM.setAttribute('src', './edit.png');
-    editDIV.classList.toggle('col');
-    editDIV.classList.toggle('col-5');
-
-    list.appendChild(editDIV);
+    let editDOM = document.createElement('input');
+    editDOM.setAttribute('type', 'button');
+    editDOM.classList.toggle('custom-btn');
+    editDOM.classList.toggle('btn-6');
+    editDOM.classList.toggle('col');
+    editDOM.classList.toggle('col-5');
+    editDOM.setAttribute('value', 'Edit');
+    list.appendChild(editDOM);
 
     //delete
     let deleteDIV = document.createElement('div');
@@ -186,12 +197,15 @@ const addBookToDom = (title, author, pages, read, inputContainer) => {
     deleteDIV.classList.toggle('col');
     deleteDIV.classList.toggle('col-5');
     deleteDIV.addEventListener('click', () => list.remove());
+    deleteDIV.style.cursor = 'pointer';
 
     list.appendChild(deleteDIV);
-    inputContainer.remove();
+    if (inputContainer) {
+        inputContainer.remove();
+    }
 
 
-    editDIV.addEventListener('click', () => edit(list, deleteDIV, harry));
+    editDOM.addEventListener('click', () => edit(list, deleteDIV, harry));
 };
 
 const createTable = () => {
@@ -250,7 +264,6 @@ const createTable = () => {
 };
 
 function addBookToLibrary() {
-    console.log('here')
     createTable()
 };
 

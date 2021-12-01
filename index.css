@@ -77,10 +77,10 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  margin-right: 9rem;
   gap: 15px; }
   .input-cntn .input {
-    width: 100px; }
+    width: 300px; }
 
 .btn {
   text-align: center; }
@@ -91,11 +91,11 @@ button {
 
 .input {
   background: none;
-  color: #c6c6c6;
+  color: black;
   font-size: 18px;
   padding: 10px 10px 10px 5px;
   display: block;
-  width: 300px !important;
+  max-width: 300px !important;
   border: none;
   border-radius: 0;
   border-bottom: 1px solid #c6c6c6; }

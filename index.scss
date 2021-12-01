@@ -104,10 +104,10 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    margin-right: 9rem;
     gap: 15px;
     .input {
-        width: 100px;
+        width: 300px;
     }
 }
 
@@ -122,11 +122,11 @@ button {
 
 .input {
     background: none;
-    color: $muted-color;
+    color: black;
     font-size: 18px;
     padding: 10px 10px 10px 5px;
     display: block;
-    width: $width !important;
+    max-width: $width !important;
     border: none;
     border-radius: 0;
     border-bottom: 1px solid $muted-color;
